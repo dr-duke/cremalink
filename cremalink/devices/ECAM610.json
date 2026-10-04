@@ -139,14 +139,17 @@
     },
     "predicates": {
       "is_busy": {
-        "kind": "not_equals",
-        "source": "action",
-        "value": 0
+        "kind": "not_in_set",
+        "source": "status",
+        "values": [
+          0,
+          7
+        ]
       },
       "is_idle": {
         "kind": "equals",
-        "source": "action",
-        "value": 0
+        "source": "status",
+        "value": 7
       }
     }
   },
