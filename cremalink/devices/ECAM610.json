@@ -126,11 +126,6 @@
         "byte": 0,
         "source": "switches"
       },
-      "is_watertank_empty": {
-        "bit": 0,
-        "byte": 0,
-        "source": "alarms"
-      },
       "is_watertank_open": {
         "bit": 5,
         "byte": 1,
