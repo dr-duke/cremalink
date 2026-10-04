@@ -10,6 +10,32 @@
 
 ---
 
+> ### About this fork
+>
+> This fork changes packaging only — no behaviour changes, no new features.
+>
+> Upstream declares the local-server stack (`fastapi`, `uvicorn`, `starlette`) and the
+> test/notebook tooling (`pytest`, `pytest-asyncio`, `ipykernel`) as runtime dependencies, so
+> every consumer installs them. That matters most in a shared environment such as Home
+> Assistant, where the integration is only an HTTP client of the add-on and imports none of
+> it: installing it still moves fastapi and starlette around, and a starlette tree left
+> straddling 0.52.x and 1.x makes the integration fail to load with
+> `cannot import name 'collapse_excgroups' from 'starlette._utils'`.
+>
+> Here the server stack lives in a `server` extra, the test tooling is gone from the runtime
+> set, starlette is left for fastapi to constrain, and the server exports are imported lazily
+> so that `import cremalink` works on a client-only install.
+>
+> ```bash
+> pip install cremalink              # client only
+> pip install "cremalink[server]"    # client + cremalink-server
+> ```
+>
+> The change is offered upstream; this fork exists so the Home Assistant integration can be
+> installed in the meantime.
+
+---
+
 ## ✨ Overview
 
 Cremalink provides a unified interface to interact with smart coffee machines via **Local LAN control** or **Cloud API**. It allows for real-time state monitoring and precise command execution.
